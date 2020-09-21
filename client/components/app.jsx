@@ -26,9 +26,17 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
-  // calculateAverage() {
-
-  // }
+  getAverageGrade() {
+    const currentGrades = this.state.grades.slice();
+    const sum = (total, currentGrade) => total + currentGrade;
+    const calculatedAverage = Math.round(currentGrades.reduce(sum, 0) / currentGrades.length);
+    this.setState(state => {
+      // console.log(calculatedAverage);
+      return {
+        average: calculatedAverage
+      };
+    });
+  }
 
   render() {
     return (
