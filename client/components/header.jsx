@@ -2,7 +2,11 @@ import React from 'react';
 
 class Header extends React.Component {
   render() {
-    return <h1>Student Grade Table</h1>;
+    return (
+      <header className="row mt-4 mb-3">
+        <h1 className="col-lg text-center">Student Grade Table</h1>
+      </header>
+    );
   }
 }
 
