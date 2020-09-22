@@ -17,6 +17,36 @@
       "name": "Douglas Crockford",
       "course": "JavaScript",
       "grade": 100
+    },
+    {
+      "name": "tiggy",
+      "course": "cat school",
+      "grade": 90,
+      "id": 34
+    },
+    {
+      "name": "Evelyn",
+      "course": "Web Development",
+      "grade": 85,
+      "id": 35
+    },
+    {
+      "name": "meow",
+      "course": "cat school",
+      "grade": 100,
+      "id": 36
+    },
+    {
+      "name": "himmy",
+      "course": "cat school",
+      "grade": 50,
+      "id": 37
+    },
+    {
+      "name": "meowmington",
+      "course": "cat school",
+      "grade": 100,
+      "id": 38
     }
   ]
 }
