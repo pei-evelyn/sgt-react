@@ -28,6 +28,7 @@ class GradeForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    event.target.reset();
     const newGrade = {
       name: this.state.name,
       course: this.state.course,

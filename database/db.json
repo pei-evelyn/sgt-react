@@ -23,6 +23,12 @@
       "course": "test",
       "grade": 50,
       "id": 33
+    },
+    {
+      "name": "test2",
+      "course": "test2",
+      "grade": 70,
+      "id": 34
     }
   ]
 }
