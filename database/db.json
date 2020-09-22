@@ -19,15 +19,15 @@
       "grade": 100
     },
     {
-      "name": "test",
-      "course": "test",
-      "grade": 50,
+      "name": "meow",
+      "course": "cat school",
+      "grade": 1000,
       "id": 33
     },
     {
-      "name": "test2",
-      "course": "test2",
-      "grade": 70,
+      "name": "tiggy",
+      "course": "cat school",
+      "grade": 90,
       "id": 34
     }
   ]

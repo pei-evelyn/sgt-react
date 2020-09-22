@@ -12,6 +12,7 @@ class GradeForm extends React.Component {
     this.handleAddCourse = this.handleAddCourse.bind(this);
     this.handleAddGrade = this.handleAddGrade.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleReset = this.handleReset.bind(this);
   }
 
   handleAddName(event) {
@@ -42,6 +43,16 @@ class GradeForm extends React.Component {
     });
   }
 
+  // handleReset(event) {
+  //   event.preventDefault();
+  //   event.target.reset();
+  //   this.setState({
+  //     name: '',
+  //     course: '',
+  //     grade: 0
+  //   });
+  // }
+
   render() {
     return (
       <form className="col-md-4" onSubmit={this.handleSubmit}>
@@ -70,8 +81,8 @@ class GradeForm extends React.Component {
           <input type="number" className="form-control" placeholder="Grade" onChange={this.handleAddGrade}/>
         </div>
         <div className="d-flex justify-content-end">
-          <button type="submit" className="btn btn-success">Add</button>
-          <button type="reset" className="btn btn-outline-secondary ml-2">Cancel</button>
+          <input type="submit" className="btn btn-success" value="Add" />
+          <input type="submit" className="btn btn-outline-secondary ml-2" value="Cancel" />
         </div>
       </form>
     );
