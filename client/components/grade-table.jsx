@@ -6,6 +6,9 @@ function Grade(props) {
       <td>{props.name}</td>
       <td>{props.course}</td>
       <td>{props.grade}</td>
+      <td>
+        <button className="btn btn-danger" onClick={props.deleteGrade}>Delete</button>
+      </td>
     </tr>
   );
 }
@@ -21,6 +24,7 @@ function GradeTable(props) {
               <th scope="col">Student Name</th>
               <th scope="col">Course</th>
               <th scope="col">Grade</th>
+              <th scope="col">Operations</th>
             </tr>
           </thead>
         </table>
@@ -35,6 +39,7 @@ function GradeTable(props) {
           name={grade.name}
           course={grade.course}
           grade={grade.grade}
+          delete={props.deleteGrade}
         />
       );
     });
@@ -45,6 +50,7 @@ function GradeTable(props) {
             <th scope="col">Student Name</th>
             <th scope="col">Course</th>
             <th scope="col">Grade</th>
+            <th scope="col">Operations</th>
           </tr>
         </thead>
         <tbody>
