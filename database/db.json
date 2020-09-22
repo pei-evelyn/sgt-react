@@ -41,6 +41,12 @@
       "course": "cat school",
       "grade": 50,
       "id": 37
+    },
+    {
+      "name": "meowmington",
+      "course": "cat school",
+      "grade": 100,
+      "id": 38
     }
   ]
 }
