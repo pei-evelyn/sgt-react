@@ -26,6 +26,22 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  addNewGrade(newGrade) {
+    fetch('/api/grades', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newGrade)
+    })
+      .then(res => res.json())
+      .then(data => this.setState(state => {
+        const gradesList = state.grades.concat(newGrade);
+        return { grades: gradesList };
+      }))
+      .catch(err => console.error(err));
+  }
+
   getAverageGrade() {
     const gradeList = [];
     for (let i = 0; i < this.state.grades.length; i++) {
@@ -46,7 +62,7 @@ class App extends React.Component {
         <Header text="Student Grade Table" average={this.getAverageGrade()}/>
         <main className="row">
           <GradeTable grades={this.state.grades} />
-          <GradeForm/>
+          <GradeForm addNewGrade={this.addNewGrade}/>
         </main>
       </>
     );

@@ -39,7 +39,7 @@ function GradeTable(props) {
       );
     });
     return (
-      <table className="table table-striped table-bordered col-lg-8">
+      <table className="table table-striped table-bordered col-md-8">
         <thead className="thead-dark">
           <tr>
             <th scope="col">Student Name</th>
