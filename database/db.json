@@ -1,21 +1,21 @@
 {
   "grades": [
     {
-      "name": "Meow",
-      "course": "How to Be a Cat",
+      "name": "Meow ",
+      "course": "How To Be a Cat",
       "grade": 100,
       "id": 1
     },
     {
       "name": "Tiggy",
-      "course": "How to Be a Cat",
-      "grade": 99,
+      "course": "How Not to be a Cat",
+      "grade": 50,
       "id": 2
     },
     {
       "name": "Himmy",
-      "course": "How to Be a Cat",
-      "grade": 90,
+      "course": "I'm an okay cat",
+      "grade": 75,
       "id": 3
     }
   ]
