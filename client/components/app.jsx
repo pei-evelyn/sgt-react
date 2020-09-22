@@ -37,7 +37,7 @@ class App extends React.Component {
     })
       .then(res => res.json())
       .then(data => this.setState(state => {
-        const gradesList = state.grades.concat(newGrade);
+        const gradesList = state.grades.concat(data);
         return { grades: gradesList };
       }))
       .catch(err => console.error(err));

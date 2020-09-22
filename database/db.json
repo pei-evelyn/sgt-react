@@ -29,6 +29,18 @@
       "course": "Web Development",
       "grade": 85,
       "id": 35
+    },
+    {
+      "name": "meow",
+      "course": "cat school",
+      "grade": 100,
+      "id": 36
+    },
+    {
+      "name": "himmy",
+      "course": "cat school",
+      "grade": 50,
+      "id": 37
     }
   ]
 }

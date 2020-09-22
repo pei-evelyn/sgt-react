@@ -6,25 +6,31 @@ class GradeForm extends React.Component {
     this.state = {
       name: '',
       course: '',
-      grade: 0
+      grade: ''
     };
-    this.handleAddGrade = this.handleAddGrade.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleCourseChange = this.handleCourseChange.bind(this);
+    this.handleGradeChange = this.handleGradeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
-  handleAddGrade(event) {
-    const target = event.target;
-    const value = target.value;
-    const formInput = target.name;
-    if (formInput === 'grade') {
-      this.setState({
-        [formInput]: parseInt(value)
-      });
-    } else {
-      this.setState({
-        [formInput]: value
-      });
-    }
+  handleNameChange(event) {
+    this.setState({
+      name: event.target.value
+    });
+  }
+
+  handleCourseChange(event) {
+    this.setState({
+      course: event.target.value
+    });
+  }
+
+  handleGradeChange(event) {
+    this.setState({
+      grade: parseInt(event.target.value)
+    });
   }
 
   handleSubmit(event) {
@@ -39,13 +45,22 @@ class GradeForm extends React.Component {
     this.setState({
       name: '',
       course: '',
-      grade: 0
+      grade: ''
+    });
+  }
+
+  handleReset(event) {
+    event.target.reset();
+    this.setState({
+      name: '',
+      course: '',
+      grade: ''
     });
   }
 
   render() {
     return (
-      <form className="col-md-4" onSubmit={this.handleSubmit}>
+      <form className="col-md-4" onSubmit={this.handleSubmit} onReset={this.handleReset}>
         <div className="input-group form-group">
           <div className="input-group-prepend">
             <div className="input-group-text px-3">
@@ -56,8 +71,8 @@ class GradeForm extends React.Component {
             type="text"
             className="form-control"
             placeholder="Name"
-            name="name"
-            onChange={this.handleAddGrade}
+            onChange={this.handleNameChange}
+            value={this.state.name}
           />
         </div>
         <div className="input-group form-group">
@@ -70,8 +85,8 @@ class GradeForm extends React.Component {
             type="text"
             className="form-control"
             placeholder="Course"
-            name="course"
-            onChange={this.handleAddGrade}
+            onChange={this.handleCourseChange}
+            value={this.state.course}
           />
         </div>
         <div className="input-group form-group">
@@ -84,13 +99,13 @@ class GradeForm extends React.Component {
             type="number"
             className="form-control"
             placeholder="Grade"
-            name="grade"
-            onChange={this.handleAddGrade}
+            onChange={this.handleGradeChange}
+            value={this.state.grade}
           />
         </div>
         <div className="d-flex justify-content-end">
-          <input type="submit" className="btn btn-success" value="Add" name="add"/>
-          <input type="submit" className="btn btn-outline-secondary ml-2" value="Cancel" name="cancel" />
+          <button type="submit" className="btn btn-success">Add</button>
+          <button type="reset" className="btn btn-outline-secondary ml-2">Cancel</button>
         </div>
       </form>
     );
