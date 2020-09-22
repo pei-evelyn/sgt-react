@@ -1,52 +1,22 @@
 {
   "grades": [
     {
-      "id": 5,
-      "name": "Kyle Simpson",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 12,
-      "name": "Brendan Eich",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 32,
-      "name": "Douglas Crockford",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "name": "tiggy",
-      "course": "cat school",
-      "grade": 90,
-      "id": 34
-    },
-    {
-      "name": "Evelyn",
-      "course": "Web Development",
-      "grade": 85,
-      "id": 35
-    },
-    {
-      "name": "meow",
-      "course": "cat school",
+      "name": "Meow ",
+      "course": "How To Be a Cat",
       "grade": 100,
-      "id": 36
+      "id": 1
     },
     {
-      "name": "himmy",
-      "course": "cat school",
+      "name": "Tiggy",
+      "course": "How Not to be a Cat",
       "grade": 50,
-      "id": 37
+      "id": 2
     },
     {
-      "name": "meowmington",
-      "course": "cat school",
-      "grade": 100,
-      "id": 38
+      "name": "Himmy",
+      "course": "I'm an okay cat",
+      "grade": 75,
+      "id": 3
     }
   ]
 }
