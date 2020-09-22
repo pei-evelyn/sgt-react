@@ -11,6 +11,7 @@ class App extends React.Component {
       grades: []
     };
     this.addNewGrade = this.addNewGrade.bind(this);
+    this.deleteGrade = this.deleteGrade.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +41,23 @@ class App extends React.Component {
         const gradesList = state.grades.concat(data);
         return { grades: gradesList };
       }))
+      .catch(err => console.error(err));
+  }
+
+  deleteGrade(id) {
+    fetch(`/api/grades${id}`, {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+      .then(data =>
+        this.setState(state => {
+          const gradeIndex = state.grades.findIndex(grade => id === grade.id);
+          const gradesCopy = state.grades.slice();
+          gradesCopy.splice(gradesCopy[gradeIndex]);
+          return {
+            grades: gradesCopy
+          };
+        }))
       .catch(err => console.error(err));
   }
 
