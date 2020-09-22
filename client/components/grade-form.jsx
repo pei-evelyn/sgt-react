@@ -8,23 +8,23 @@ class GradeForm extends React.Component {
       course: '',
       grade: 0
     };
-    this.handleAddName = this.handleAddName.bind(this);
-    this.handleAddCourse = this.handleAddCourse.bind(this);
     this.handleAddGrade = this.handleAddGrade.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleReset = this.handleReset.bind(this);
-  }
-
-  handleAddName(event) {
-    this.setState({ name: event.target.value });
-  }
-
-  handleAddCourse(event) {
-    this.setState({ course: event.target.value });
   }
 
   handleAddGrade(event) {
-    this.setState({ grade: parseInt(event.target.value) });
+    const target = event.target;
+    const value = target.value;
+    const formInput = target.name;
+    if (formInput === 'grade') {
+      this.setState({
+        [formInput]: parseInt(value)
+      });
+    } else {
+      this.setState({
+        [formInput]: value
+      });
+    }
   }
 
   handleSubmit(event) {
@@ -43,16 +43,6 @@ class GradeForm extends React.Component {
     });
   }
 
-  // handleReset(event) {
-  //   event.preventDefault();
-  //   event.target.reset();
-  //   this.setState({
-  //     name: '',
-  //     course: '',
-  //     grade: 0
-  //   });
-  // }
-
   render() {
     return (
       <form className="col-md-4" onSubmit={this.handleSubmit}>
@@ -62,7 +52,13 @@ class GradeForm extends React.Component {
               <i className="fas fa-user"></i>
             </div>
           </div>
-          <input type="text" className="form-control" placeholder="Name" onChange={this.handleAddName}/>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Name"
+            name="name"
+            onChange={this.handleAddGrade}
+          />
         </div>
         <div className="input-group form-group">
           <div className="input-group-prepend">
@@ -70,7 +66,13 @@ class GradeForm extends React.Component {
               <i className="fas fa-list-alt"></i>
             </div>
           </div>
-          <input type="text" className="form-control" placeholder="Course" onChange={this.handleAddCourse}/>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Course"
+            name="course"
+            onChange={this.handleAddGrade}
+          />
         </div>
         <div className="input-group form-group">
           <div className="input-group-prepend">
@@ -78,11 +80,17 @@ class GradeForm extends React.Component {
               <i className="fas fa-graduation-cap"></i>
             </div>
           </div>
-          <input type="number" className="form-control" placeholder="Grade" onChange={this.handleAddGrade}/>
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Grade"
+            name="grade"
+            onChange={this.handleAddGrade}
+          />
         </div>
         <div className="d-flex justify-content-end">
-          <input type="submit" className="btn btn-success" value="Add" />
-          <input type="submit" className="btn btn-outline-secondary ml-2" value="Cancel" />
+          <input type="submit" className="btn btn-success" value="Add" name="add"/>
+          <input type="submit" className="btn btn-outline-secondary ml-2" value="Cancel" name="cancel" />
         </div>
       </form>
     );
