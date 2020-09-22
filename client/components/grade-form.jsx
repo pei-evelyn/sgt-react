@@ -60,7 +60,7 @@ class GradeForm extends React.Component {
 
   render() {
     return (
-      <form className="col-md-4" onSubmit={this.handleSubmit} onReset={this.handleReset}>
+      <form className="col-lg-4" onSubmit={this.handleSubmit} onReset={this.handleReset}>
         <div className="input-group form-group">
           <div className="input-group-prepend">
             <div className="input-group-text px-3">
