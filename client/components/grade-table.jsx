@@ -7,7 +7,7 @@ function Grade(props) {
       <td>{props.course}</td>
       <td>{props.grade}</td>
       <td>
-        <button className="btn btn-danger" onClick={props.deleteGrade}>Delete</button>
+        <button className="btn btn-danger" onClick={() => props.delete(props.id)}>Delete</button>
       </td>
     </tr>
   );
@@ -15,9 +15,10 @@ function Grade(props) {
 
 function GradeTable(props) {
   const grades = props.grades;
+  const deleteGrade = props.deleteGrade;
   if (grades.length === 0) {
     return (
-      <>
+      <div className="col-md-8">
         <table className="table">
           <thead className="thead-dark">
             <tr>
@@ -28,18 +29,19 @@ function GradeTable(props) {
             </tr>
           </thead>
         </table>
-        <h3>No Grades Recorded</h3>
-      </>
+        <h4 className="mx-auto mb-4">No Grades Recorded</h4>
+      </div>
     );
   } else {
     const gradeList = grades.map(grade => {
       return (
         <Grade
           key={grade.id}
+          id={grade.id}
           name={grade.name}
           course={grade.course}
           grade={grade.grade}
-          delete={props.deleteGrade}
+          delete={deleteGrade}
         />
       );
     });

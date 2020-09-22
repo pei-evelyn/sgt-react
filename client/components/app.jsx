@@ -45,18 +45,16 @@ class App extends React.Component {
   }
 
   deleteGrade(id) {
-    fetch(`/api/grades${id}`, {
+    const gradeIndex = this.state.grades.findIndex(grade => id === grade.id);
+    const gradesCopy = this.state.grades.slice();
+    gradesCopy.splice(gradeIndex, 1);
+    fetch(`/api/grades/${id}`, {
       method: 'DELETE'
     })
       .then(res => res.json())
       .then(data =>
-        this.setState(state => {
-          const gradeIndex = state.grades.findIndex(grade => id === grade.id);
-          const gradesCopy = state.grades.slice();
-          gradesCopy.splice(gradesCopy[gradeIndex]);
-          return {
-            grades: gradesCopy
-          };
+        this.setState({
+          grades: gradesCopy
         }))
       .catch(err => console.error(err));
   }
