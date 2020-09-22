@@ -18,7 +18,7 @@ function GradeTable(props) {
   const deleteGrade = props.deleteGrade;
   if (grades.length === 0) {
     return (
-      <div className="col-md-8">
+      <div className="col-lg-8">
         <table className="table">
           <thead className="thead-dark">
             <tr>
@@ -46,7 +46,7 @@ function GradeTable(props) {
       );
     });
     return (
-      <table className="table table-striped table-bordered col-md-8">
+      <table className="table table-striped table-bordered col-lg-8">
         <thead className="thead-dark">
           <tr>
             <th scope="col">Student Name</th>
