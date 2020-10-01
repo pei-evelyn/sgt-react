@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grades: []
+      grades: [],
+      view: 'add'
     };
     this.addNewGrade = this.addNewGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
@@ -22,8 +23,8 @@ class App extends React.Component {
     fetch('/api/grades')
       .then(res => res.json())
       .then(grades =>
-        this.setState(state => {
-          return { grades: grades };
+        this.setState({
+          grades: grades
         }))
       .catch(err => console.error(err));
   }
@@ -39,7 +40,10 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data => this.setState(state => {
         const gradesList = state.grades.concat(data);
-        return { grades: gradesList };
+        return {
+          grades: gradesList,
+          view: 'add'
+        };
       }))
       .catch(err => console.error(err));
   }
@@ -59,6 +63,22 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  updateGrade(updatedGrade) {
+    // const gradeIndex = this.state.grades.findIndex(grade => updatedGrade.id === grade.id);
+
+    fetch(`/api/grades/${updatedGrade.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify()
+    })
+      .then(res => res.json());
+    // .then(data => this.setState(state => {
+    //   console.log(data);
+    // }));
+  }
+
   getAverageGrade() {
     const gradeList = [];
     for (let i = 0; i < this.state.grades.length; i++) {
@@ -74,15 +94,29 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <Header text="Student Grade Table" average={this.getAverageGrade()}/>
-        <main className="row">
-          <GradeTable grades={this.state.grades} deleteGrade={this.deleteGrade}/>
-          <GradeForm addNewGrade={this.addNewGrade}/>
-        </main>
-      </>
-    );
+
+    if (this.state.view === 'add') {
+      return (
+        <>
+          <Header text="Student Grade Table" average={this.getAverageGrade()} />
+          <main className="row">
+            <GradeTable grades={this.state.grades} deleteGrade={this.deleteGrade} />
+            <GradeForm addNewGrade={this.addNewGrade} btnText="Add" view={this.state.view}/>
+          </main>
+        </>
+      );
+    } else if (this.state.view === 'update') {
+      return (
+        <>
+          <Header text="Student Grade Table" average={this.getAverageGrade()} />
+          <main className="row">
+            <GradeTable grades={this.state.grades} deleteGrade={this.deleteGrade} />
+            <GradeForm addNewGrade={this.addNewGrade} btnText="Update" />
+          </main>
+        </>
+      );
+    }
+
   }
 }
 

@@ -36,12 +36,18 @@ class GradeForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     event.target.reset();
-    const newGrade = {
+    const grade = {
       name: this.state.name,
       course: this.state.course,
       grade: this.state.grade
     };
-    this.props.addNewGrade(newGrade);
+
+    if (this.props.view === 'add') {
+      this.props.addNewGrade(grade);
+    } else if (this.props.view === 'update') {
+      this.props.updateGrade(grade);
+    }
+
     this.setState({
       name: '',
       course: '',
@@ -104,7 +110,7 @@ class GradeForm extends React.Component {
           />
         </div>
         <div className="d-flex justify-content-end">
-          <button type="submit" className="btn btn-success">Add</button>
+          <button type="submit" className="btn btn-success">{this.props.btnText}</button>
           <button type="reset" className="btn btn-outline-secondary ml-2">Cancel</button>
         </div>
       </form>
