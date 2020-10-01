@@ -43,6 +43,7 @@ function GradeTable(props) {
           course={grade.course}
           grade={grade.grade}
           delete={deleteGrade}
+          getGrade={props.getGrade}
         />
       );
     });

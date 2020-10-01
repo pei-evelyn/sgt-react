@@ -13,6 +13,7 @@ class App extends React.Component {
     };
     this.addNewGrade = this.addNewGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
+    this.getGradeToUpdate = this.getGradeToUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -79,6 +80,14 @@ class App extends React.Component {
     // }));
   }
 
+  getGradeToUpdate(id) {
+    const gradeIndex = this.state.grades.findIndex(grade => id === grade.id);
+    const gradesCopy = this.state.grades.slice();
+    const gradeToUpdate = gradesCopy[gradeIndex];
+    this.gradeToUpdate = gradeToUpdate;
+    this.setState({ view: 'update' });
+  }
+
   getAverageGrade() {
     const gradeList = [];
     for (let i = 0; i < this.state.grades.length; i++) {
@@ -94,14 +103,21 @@ class App extends React.Component {
   }
 
   render() {
-
     if (this.state.view === 'add') {
       return (
         <>
           <Header text="Student Grade Table" average={this.getAverageGrade()} />
           <main className="row">
-            <GradeTable grades={this.state.grades} deleteGrade={this.deleteGrade} />
-            <GradeForm addNewGrade={this.addNewGrade} btnText="Add" view={this.state.view}/>
+            <GradeTable
+              grades={this.state.grades}
+              deleteGrade={this.deleteGrade}
+              getGrade={this.getGradeToUpdate}
+            />
+            <GradeForm
+              addNewGrade={this.addNewGrade}
+              btnText="Add"
+              view={this.state.view}
+            />
           </main>
         </>
       );
@@ -110,8 +126,17 @@ class App extends React.Component {
         <>
           <Header text="Student Grade Table" average={this.getAverageGrade()} />
           <main className="row">
-            <GradeTable grades={this.state.grades} deleteGrade={this.deleteGrade} />
-            <GradeForm addNewGrade={this.addNewGrade} btnText="Update" />
+            <GradeTable
+              grades={this.state.grades}
+              deleteGrade={this.deleteGrade}
+              getGrade={this.getGradeToUpdate}
+            />
+            <GradeForm
+              addNewGrade={this.addNewGrade}
+              btnText="Update"
+              view={this.state.view}
+              gradeToUpdate={this.gradeToUpdate}
+            />
           </main>
         </>
       );
