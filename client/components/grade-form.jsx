@@ -18,7 +18,6 @@ class GradeForm extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.view === 'update') {
       const grade = this.props.gradeToUpdate;
-      // console.log(grade);
       if (prevProps.gradeToUpdate !== this.props.gradeToUpdate) {
         this.setState({
           name: grade.name,
@@ -59,6 +58,7 @@ class GradeForm extends React.Component {
     if (this.props.view === 'add') {
       this.props.addNewGrade(grade);
     } else if (this.props.view === 'update') {
+      grade.id = this.props.gradeToUpdate.id;
       this.props.updateGrade(grade);
     }
 

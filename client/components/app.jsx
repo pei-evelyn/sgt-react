@@ -14,6 +14,7 @@ class App extends React.Component {
     this.addNewGrade = this.addNewGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
     this.getGradeToUpdate = this.getGradeToUpdate.bind(this);
+    this.updateGrade = this.updateGrade.bind(this);
   }
 
   componentDidMount() {
@@ -64,20 +65,25 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
-  updateGrade(updatedGrade) {
-    // const gradeIndex = this.state.grades.findIndex(grade => updatedGrade.id === grade.id);
+  updateGrade(editedGrade) {
+    const gradeIndex = this.state.grades.findIndex(grade => editedGrade.id === grade.id);
+    const gradesCopy = this.state.grades.slice();
+    gradesCopy[gradeIndex] = editedGrade;
 
-    fetch(`/api/grades/${updatedGrade.id}`, {
+    fetch(`/api/grades/${editedGrade.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify()
+      body: JSON.stringify(editedGrade)
     })
-      .then(res => res.json());
-    // .then(data => this.setState(state => {
-    //   console.log(data);
-    // }));
+      .then(res => res.json())
+      .then(data =>
+        this.setState({
+          grades: gradesCopy,
+          view: 'add'
+        }))
+      .catch(err => console.error(err));
   }
 
   getGradeToUpdate(id) {
@@ -132,7 +138,7 @@ class App extends React.Component {
               getGrade={this.getGradeToUpdate}
             />
             <GradeForm
-              addNewGrade={this.addNewGrade}
+              updateGrade={this.updateGrade}
               btnText="Update"
               view={this.state.view}
               gradeToUpdate={this.gradeToUpdate}
