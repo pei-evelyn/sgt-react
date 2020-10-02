@@ -9,7 +9,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       grades: [],
-      view: 'add'
+      view: 'add',
+      gradeToEdit: null
     };
     this.addNewGrade = this.addNewGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
@@ -81,17 +82,19 @@ class App extends React.Component {
       .then(data =>
         this.setState({
           grades: gradesCopy,
-          view: 'add'
+          view: 'add',
+          gradeToEdit: null
         }))
       .catch(err => console.error(err));
   }
 
   getGradeToUpdate(id) {
     const gradeIndex = this.state.grades.findIndex(grade => id === grade.id);
-    const gradesCopy = this.state.grades.slice();
-    const gradeToUpdate = gradesCopy[gradeIndex];
-    this.gradeToUpdate = gradeToUpdate;
-    this.setState({ view: 'update' });
+    const gradeToUpdate = this.state.grades[gradeIndex];
+    this.setState({
+      view: 'update',
+      gradeToEdit: gradeToUpdate
+    });
   }
 
   getAverageGrade() {
@@ -141,7 +144,7 @@ class App extends React.Component {
               updateGrade={this.updateGrade}
               btnText="Update"
               view={this.state.view}
-              gradeToUpdate={this.gradeToUpdate}
+              gradeToUpdate={this.state.gradeToEdit}
             />
           </main>
         </>
