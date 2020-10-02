@@ -8,10 +8,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grades: []
+      grades: [],
+      view: 'add',
+      gradeToEdit: null
     };
     this.addNewGrade = this.addNewGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
+    this.getGradeToUpdate = this.getGradeToUpdate.bind(this);
+    this.updateGrade = this.updateGrade.bind(this);
   }
 
   componentDidMount() {
@@ -22,8 +26,8 @@ class App extends React.Component {
     fetch('/api/grades')
       .then(res => res.json())
       .then(grades =>
-        this.setState(state => {
-          return { grades: grades };
+        this.setState({
+          grades: grades
         }))
       .catch(err => console.error(err));
   }
@@ -39,7 +43,10 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data => this.setState(state => {
         const gradesList = state.grades.concat(data);
-        return { grades: gradesList };
+        return {
+          grades: gradesList,
+          view: 'add'
+        };
       }))
       .catch(err => console.error(err));
   }
@@ -59,6 +66,37 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  updateGrade(editedGrade) {
+    const gradeIndex = this.state.grades.findIndex(grade => editedGrade.id === grade.id);
+    const gradesCopy = this.state.grades.slice();
+    gradesCopy[gradeIndex] = editedGrade;
+
+    fetch(`/api/grades/${editedGrade.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedGrade)
+    })
+      .then(res => res.json())
+      .then(data =>
+        this.setState({
+          grades: gradesCopy,
+          view: 'add',
+          gradeToEdit: null
+        }))
+      .catch(err => console.error(err));
+  }
+
+  getGradeToUpdate(id) {
+    const gradeIndex = this.state.grades.findIndex(grade => id === grade.id);
+    const gradeToUpdate = this.state.grades[gradeIndex];
+    this.setState({
+      view: 'update',
+      gradeToEdit: gradeToUpdate
+    });
+  }
+
   getAverageGrade() {
     const gradeList = [];
     for (let i = 0; i < this.state.grades.length; i++) {
@@ -74,15 +112,45 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <Header text="Student Grade Table" average={this.getAverageGrade()}/>
-        <main className="row">
-          <GradeTable grades={this.state.grades} deleteGrade={this.deleteGrade}/>
-          <GradeForm addNewGrade={this.addNewGrade}/>
-        </main>
-      </>
-    );
+    if (this.state.view === 'add') {
+      return (
+        <>
+          <Header text="Student Grade Table" average={this.getAverageGrade()} />
+          <main className="row">
+            <GradeTable
+              grades={this.state.grades}
+              deleteGrade={this.deleteGrade}
+              getGrade={this.getGradeToUpdate}
+            />
+            <GradeForm
+              addNewGrade={this.addNewGrade}
+              btnText="Add"
+              view={this.state.view}
+            />
+          </main>
+        </>
+      );
+    } else if (this.state.view === 'update') {
+      return (
+        <>
+          <Header text="Student Grade Table" average={this.getAverageGrade()} />
+          <main className="row">
+            <GradeTable
+              grades={this.state.grades}
+              deleteGrade={this.deleteGrade}
+              getGrade={this.getGradeToUpdate}
+            />
+            <GradeForm
+              updateGrade={this.updateGrade}
+              btnText="Update"
+              view={this.state.view}
+              gradeToUpdate={this.state.gradeToEdit}
+            />
+          </main>
+        </>
+      );
+    }
+
   }
 }
 
